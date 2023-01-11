@@ -75,14 +75,14 @@ function Header() {
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email address</Form.Label>
-              <Form.Control type="text" value={currentUser.id} />
+              <Form.Control type="text" />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
               <Form.Label>Example textarea</Form.Label>
-              <Form.Control type="text" value={currentUser.email} />
+              <Form.Control type="text" />
             </Form.Group>
           </Form>
         </Modal.Body>
