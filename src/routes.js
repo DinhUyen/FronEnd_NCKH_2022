@@ -112,20 +112,20 @@ const dashboardRoutes = [
     component: Vulnerability,
     layout: "/admin"
   },
-  {
-    path: "/waiting",
-    name: "Đang chờ",
-    icon: "nc-icon nc-watch-time",
-    component: Waiting,
-    layout: "/admin"
-  },
-  {
-    path: "/accepted",
-    name: "Đã chấp nhận",
-    icon: "nc-icon nc-check-2",
-    component: Accepted,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/waiting",
+  //   name: "Đang chờ",
+  //   icon: "nc-icon nc-watch-time",
+  //   component: Waiting,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/accepted",
+  //   name: "Đã chấp nhận",
+  //   icon: "nc-icon nc-check-2",
+  //   component: Accepted,
+  //   layout: "/admin"
+  // },
   {
     path: "/setting",
     name: "Cài đặt",
