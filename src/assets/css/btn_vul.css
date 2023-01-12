@@ -31,3 +31,19 @@ h1 {
     border-radius: 35px;
     font-size: 12px;
     text-align: center;}
+.btn-table{
+    border-color: #1DC7EA;
+    color: #1DC7EA;
+}
+.btn-table:hover{
+    background-color: #1DC7EA;
+    color:aliceblue;
+    border-color: #1DC7EA;
+}
+.btn-left{
+    margin-left: 10px;
+}
+.icon-vul{
+    margin-left: 10px;
+    margin-top: 10px;
+}

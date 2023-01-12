@@ -96,9 +96,18 @@ function Result() {
                             <button type="button" title="Nguy cơ" class="btn btn-success btn-circle btn-sm">{item.information}</button>
                             </tr>
                             <td>
-                            <Button type="button" onClick={(e)=>getReport(item.id)}>
+                            <Button type="button" 
+                            className="btn-table"
+                            onClick={(e)=>getReport(item.id)}>
                                 Báo cáo
                               </Button>
+                              <Link to={`/admin/vulnerability?task_id=${item.id}`}> 
+                              <Button type="button" 
+                              className="btn-table btn-left" 
+                              > 
+                              Chi tiết
+                              </Button>
+                            </Link>
                             </td>
                           </tr>
                         );

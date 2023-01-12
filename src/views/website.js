@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal';
 import "../assets/css/switch.css"
+import "../assets/css/btn_vul.css"
 import { useEffect } from "react";
 import axiosClient from "service/axiosClient";
 // react-bootstrap components
@@ -58,6 +59,13 @@ function Website() {
     
     setShow(false)
    }
+   async function createScan(id){
+    console.log(id)
+    const res = await axiosClient.post("/scans",{
+      target_id:id
+    })
+    console.log(res)
+   }
   return (
       
     <>
@@ -108,11 +116,6 @@ function Website() {
                 <Card.Title as="h4">Thêm trang web</Card.Title>
               </Card.Header>
               <Card.Body>
-              {/* <div >
-                  <p>
-                  Rà soát xác minh mục tiêu cho phép bạn xác nhận quyền sở hữu trang web bạn muốn rà soát
-                  </p>
-              </div> */}
               <div>
               <span style={{ fontWeight: 'bold' }}>Tên miền của bạn</span>
               <Form>
@@ -148,35 +151,6 @@ function Website() {
               </Form> 
               </div>
               <div>
-{/*                 
-                <div>
-                <span style={{ fontWeight: 'bold' }}>Xác minh phương thức</span>
-                </div>
-                <br/>
-                <div>
-                  <span style={{ marginLeft:20,  marginTop: 20, color: 'navy'}}>Bước 1</span>
-                </div>
-                <div>
-                  <span style={{ marginLeft:20, fontSize:13, marginTop: 20}}>Tải về</span>
-                  <span style={{ marginLeft:10, fontSize:13, color: 'skyblue'}}>VulHunterVerify.html</span>
-
-                  </div>
-                  <div>
-                  <span style={{ marginLeft:20,  marginTop: 20, color: 'navy'}}>Bước 2</span>
-                </div>
-                <div>
-                  <span style={{ fontWeight: 'bold', marginLeft:20, fontSize:13, marginTop: 20}}>Upload</span>
-                  <span style={{ marginLeft:10, fontSize:13}}>Tập tin đến trang web của bạn</span>
-
-                  </div>
-                  <div>
-                  <span style={{ marginLeft:20,  marginTop: 20, color: 'navy'}}>Bước 3</span>
-                </div>
-                <div>
-                  <span style={{ fontWeight: 'bold', marginLeft:20, fontSize:13, marginTop: 20}}>Click verify</span>
-                  <span style={{ marginLeft:10, fontSize:13}}>bên dưới</span>
-
-                  </div> */}
                   <Button
                     onClick={handleAddtarget}
                     className="btn-fill pull-right verify-website"
@@ -217,14 +191,25 @@ function Website() {
                             <td>{item.name}</td>
                             <td>{item.created_at}</td>
                             <td>
-                            <Button type="button" onClick={(e)=>getId(item.id)}>
-                                Chỉnh sửa
+                            <Button className="btn-table"
+                            onClick={(e)=>createScan(item.id)}
+                            type="button"
+                             >
+                              Bắt đầu quét
+                            </Button>
+                            <Button type="button" 
+                              className="btn-table btn-left" 
+                              onClick={(e)=>getId(item.id)}>
+                              Chỉnh sửa
+                            </Button>
+                            <Link to={`/admin/result?target_id=${item.id}`}> 
+                              <Button type="button" 
+                              className="btn-table btn-left" 
+                              > 
+                              Chi tiết
                               </Button>
-                              <Button type="button" onClick={(e)=>getId(item.id)}>
-                                <Link to={`/admin/result?target_id=${item.id}`}> 
-                                Chi tiết
-                                </Link>
-                              </Button>
+                            </Link>
+                             
                             </td>
                             
                           </tr>
