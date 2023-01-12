@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import axiosClient from "service/axiosClient";
+import { useEffect } from "react";
+import queryString from "query-string";
+import { useLocation } from "react-router";
 
 // react-bootstrap components
 import {
@@ -10,10 +14,27 @@ import {
   Nav,
   Container,
   Row,
-  Col
+  Col,
+  Alert,
 } from "react-bootstrap";
 
 function User() {
+  const [detailUser, setDetailUser] = useState([]);
+  const {search}=useLocation();
+  console.log(search);
+  const values=queryString.parse(search);
+  // console.log(values.id);
+
+
+  useEffect(() => {
+    async function getDetailUser() {
+      const res = await axiosClient.get(`users/${values.id}/info`);
+      console.log(res);
+      setDetailUser(res.data);
+    }
+    getDetailUser();
+  }, []);
+  console.log(detailUser);
   return (
     <>
       <Container fluid>
@@ -28,12 +49,11 @@ function User() {
                   <Row>
                     <Col className="pr-1" md="12">
                       <Form.Group>
-                        <label>Company (disabled)</label>
+                        <label>ID</label>
                         <Form.Control
-                          defaultValue="Creative Code Inc."
-                          disabled
                           placeholder="Company"
                           type="text"
+                          value={detailUser.id}
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -41,59 +61,77 @@ function User() {
                   <Row>
                     <Col className="pr-1" md="12">
                       <Form.Group>
-                        <label>Company (disabled)</label>
+                        <label>Email</label>
                         <Form.Control
-                          defaultValue="Creative Code Inc."
                           placeholder="Company"
                           type="text"
+                          value={detailUser.email}
                         ></Form.Control>
                       </Form.Group>
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
+                    <Col className="pr-1" md="12">
+                      <Form.Group>
+                        <label>is_accepted</label>
+                        <Form.Control
+                          placeholder="Company"
+                          type="text"
+                          value={detailUser.is_accepted}
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col className="pr-1" md="12">
                       <Form.Group>
                         <label>running</label>
                         <Form.Control
-                          defaultValue="Mike"
                           placeholder="Company"
                           type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                    <Col className="pl-1" md="6">
-                      <Form.Group>
-                        <label>finished</label>
-                        <Form.Control
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
+                          value={detailUser.running}
                         ></Form.Control>
                       </Form.Group>
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-1" md="6">
+                    <Col className="pr-1" md="12">
                       <Form.Group>
-                        <label>total_alert</label>
+                        <label>finished</label>
                         <Form.Control
-                          defaultValue="Mike"
                           placeholder="Company"
                           type="text"
-                        ></Form.Control>
-                      </Form.Group>
-                    </Col>
-                    <Col className="pl-1" md="6">
-                      <Form.Group>
-                        <label>total_scan</label>
-                        <Form.Control
-                          defaultValue="Andrew"
-                          placeholder="Last Name"
-                          type="text"
+                          value={detailUser.finished}
                         ></Form.Control>
                       </Form.Group>
                     </Col>
                   </Row>
+                  <Row>
+                    <Col className="pr-1" md="12">
+                      <Form.Group>
+                        <label>total_alert</label>
+                        <Form.Control
+                          placeholder="Company"
+                          type="text"
+                          value={detailUser.total_alert}
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col className="pr-1" md="12">
+                      <Form.Group>
+                        <label>total_scan</label>
+                        <Form.Control
+                          placeholder="Company"
+                          type="text"
+                          value={detailUser.total_scan}
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
+
                   <Button
                     className="btn-fill pull-right"
                     type="submit"
